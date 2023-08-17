@@ -54,3 +54,42 @@ function extractAndConvert<T extends object, U extends keyof T>(
 }
 
 extractAndConvert({ name: "Max", age: 5 }, "age");
+
+// GENERIC CLASSES
+class DataStorage<T extends string | boolean | number> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem("Ellissa");
+textStorage.addItem("Leeyan");
+textStorage.removeItem("Ellissa");
+console.log(textStorage.getItems());
+
+const numberStorage = new DataStorage<number>();
+numberStorage.addItem(5);
+numberStorage.addItem(10);
+numberStorage.removeItem(5);
+console.log(numberStorage.getItems());
+
+// Wont work properly as the class is designed for primitive types only, splice will not work the same on object as primitive
+// Can use if checks within the removeItem function or better yet create another class for objects
+// Hence why making the class only accept strings/numbers/booleans
+
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({ name: "Ellissa" });
+// objStorage.addItem({ name: "Leeyan" });
+// objStorage.removeItem({ name: "Ellissa" });
+// console.log(objStorage.getItems());
