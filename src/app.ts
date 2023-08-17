@@ -43,3 +43,14 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
 
 // Works because strings have a length property based off interface Lengthy
 console.log(countAndDescribe("Hi there!"));
+
+// keyof constraint ensures that whatever is passed in to the generic function is a key within the variable object.
+// In this instance parameter U must be a key within object T
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return `Value: ${obj[key]}`;
+}
+
+extractAndConvert({ name: "Max", age: 5 }, "age");
