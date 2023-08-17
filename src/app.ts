@@ -13,3 +13,14 @@ const promise: Promise<string> = new Promise((resolve, reject) => {
 promise.then((data) => {
   data.split(" ");
 });
+
+function merge<T, U>(objA: T, objB: U) {
+  return { ...objA, ...objB };
+}
+
+const mergedObj = merge(
+  { name: "Ellissa" },
+  { occupation: "Doctor", partner: "Leeyan" }
+);
+
+console.log(mergedObj.name);
