@@ -93,3 +93,34 @@ console.log(numberStorage.getItems());
 // objStorage.addItem({ name: "Leeyan" });
 // objStorage.removeItem({ name: "Ellissa" });
 // console.log(objStorage.getItems());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+// PARTIAL GENERIC FUNCTION
+function createCourseGoal(
+  title: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  // Using Partial<CourseGoal> allows the object be temporarily incomplete(does not contain all the properties of type CourseGoal)
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  // Here courseGoal type is set to Partial<CourseGoal> meaning that the type returned does not match what is described in the function, using Typecast to turn it back into CourseGoal after all properties are present
+  return courseGoal as CourseGoal;
+}
+
+// Readonly makes it so that the value can't be changed afterwards (can't push or pop this array)
+const namesList: Readonly<string[]> = ["Max", "Ellissa"];
+
+// Not allowed because the array is set as a readonly array of string
+// namesList.pop();
+// namesList.push("Leeyan");
+
+// GENERIC TYPES ARE GOOD TO USE WHEN YOU WANT IN A CERTAIN TYPE
+// UNION TYPES ARE GOOD WHEN YOU WANT TO ALLOW CERTAIN TYPES MULTIPLE TIMES MORE FLEXIBLE
